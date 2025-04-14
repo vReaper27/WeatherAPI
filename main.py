@@ -1,8 +1,12 @@
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 import requests
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return redirect('/weather')
 
 
 @app.route('/weather', methods=['GET'])
