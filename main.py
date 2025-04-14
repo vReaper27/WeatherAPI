@@ -4,9 +4,6 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Weather API is running. Try /weather endpoint."
 
 @app.route('/weather', methods=['GET'])
 def weather():
