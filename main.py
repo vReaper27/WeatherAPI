@@ -8,12 +8,15 @@ app = Flask(__name__)
 def index():
     return redirect('/weather')
 
-
 @app.route('/weather', methods=['GET'])
-def weather():
-    url = 'http://api.weatherapi.com/v1/current.json?key=2375a5443d77400e93e131230251404&q=London&aqi=no'
+def get_weather():
+  
+  API_KEY = '2375a5443d77400e93e131230251404'
+  city = request.args.get('city', default= None, type = str) 
+  
+  url = f'http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=no'
 
-    try:
+  try:
         response = requests.get(url)
         data = response.json()
 
@@ -23,7 +26,7 @@ def weather():
         }
 
         return jsonify(weather_info)
-    except Exception as e:
+  except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
