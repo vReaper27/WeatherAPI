@@ -1,6 +1,7 @@
 
 from flask import Flask, jsonify, request, redirect
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def index():
 @app.route('/weather', methods=['GET'])
 def get_weather():
   
-  API_KEY = '2375a5443d77400e93e131230251404'
+  API_KEY = os.getenv('API_KEY')
   city = request.args.get('city', default= None, type = str) 
   
   url = f'http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}&aqi=no'
