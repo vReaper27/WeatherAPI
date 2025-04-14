@@ -13,7 +13,7 @@ def clima():
 
   wheater_info = {
     'temperature': data['main']['temp'],
-    'description': data['weather'][0]['description'],
+    'description': data['current']['condition']['text']
   }
 
   return jsonify(wheater_info)
