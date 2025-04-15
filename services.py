@@ -1,6 +1,8 @@
 import requests
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def fetch_weather_data(city):
     API_KEY = os.getenv('API_KEY')
