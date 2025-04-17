@@ -14,17 +14,19 @@ def get_weather():
     try:
         weather_data = fetch_weather_data(city)
 
-        # Extrai os campos pedidos, se houver
-        selected_fields = {}
+        # Monta a resposta
+        response_data = {'city': weather_data['city']}
+
         if fields:
             requested = [field.strip() for field in fields.split(',')]
             for field in requested:
                 if field in weather_data:
-                    selected_fields[field] = weather_data[field]
-
-        # Insere a cidade como primeiro item
-        response_data = {'city': weather_data['city']}
-        response_data.update(selected_fields)
+                    response_data[field] = weather_data[field]
+        else:
+            # Se nenhum campo for especificado, retorna todos (menos o 'city' que já foi incluído)
+            for key, value in weather_data.items():
+                if key != 'city':
+                    response_data[key] = value
 
         return jsonify(response_data)
 
